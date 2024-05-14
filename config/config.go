@@ -6,7 +6,8 @@ import (
 )
 
 var (
-	db *gorm.DB
+	db     *gorm.DB
+	logger *Logger
 )
 
 func Init() (*gorm.DB, error) {
@@ -14,4 +15,9 @@ func Init() (*gorm.DB, error) {
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	return db, err
+}
+
+func GetLogger(p string) *Logger {
+	logger = NewLogger(p)
+	return logger
 }
