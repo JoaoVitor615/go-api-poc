@@ -1,7 +1,8 @@
 package config
 
 import (
-	"gorm.io/driver/mysql"
+	"fmt"
+
 	"gorm.io/gorm"
 )
 
@@ -10,11 +11,20 @@ var (
 	logger *Logger
 )
 
-func Init() (*gorm.DB, error) {
-	dsn := "root:123456@tcp(127.0.0.1:3306)/go_api_poc?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+func Init() error {
+	var err error
 
-	return db, err
+	db, err = InitializeSqlite()
+
+	if err != nil {
+		return fmt.Errorf("Error initializing sqlite: %v", err)
+	}
+
+	return nil
+}
+
+func GetSqlite() *gorm.DB {
+	return db
 }
 
 func GetLogger(p string) *Logger {

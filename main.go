@@ -14,9 +14,7 @@ func main() {
 	logger = config.GetLogger("main")
 
 	//Initialize configs
-	db, err := config.Init()
-
-	logger.Infof("Database connection: %v", db)
+	err := config.Init()
 
 	if err != nil {
 		logger.Errorf("Error initializing configs: %v", err)
