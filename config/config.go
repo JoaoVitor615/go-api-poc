@@ -14,16 +14,16 @@ var (
 func Init() error {
 	var err error
 
-	db, err = InitializeSqlite()
+	db, err = InitializeMysql()
 
 	if err != nil {
-		return fmt.Errorf("Error initializing sqlite: %v", err)
+		return fmt.Errorf("Error initializing Mysql: %v", err)
 	}
 
 	return nil
 }
 
-func GetSqlite() *gorm.DB {
+func GetMysql() *gorm.DB {
 	return db
 }
 
